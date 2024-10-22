@@ -1,5 +1,6 @@
 import Banner from "./assets/Banner"
 import Header from "./assets/Header"
+import OurRecipes from "./assets/OurRecipes"
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
      
       <Header/>
       <Banner/>
+      <OurRecipes/>
      
       
     </>
