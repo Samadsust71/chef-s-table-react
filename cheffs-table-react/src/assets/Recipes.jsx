@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Recipe from "./Recipe";
-import { addData, removedData } from "./localStorageData";
+import { addData, getData, removedData } from "./localStorageData";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -15,6 +15,21 @@ const Recipes = () => {
       .then((data) => setRecipes(data));
   }, []);
 
+  useEffect(()=>{
+    if (recipes.length) {
+        const storedCart = getData();
+        const savedCart = [];
+        for (const id of storedCart) {
+          const post = recipes.find((post) => post.recipe_id === id);
+          if (post) {
+            savedCart.push(post);
+          }
+        }
+        setWantCook(savedCart);
+        console.log(savedCart)
+      }
+  },[recipes])
+
   const handleWantToCook = (recipe) => {
     const isExist = wantCook.find(
       (item) => item.recipe_id === recipe.recipe_id
@@ -25,7 +40,7 @@ const Recipes = () => {
       setWantCook(totalRecipes);
       addData(recipe.recipe_id);
     } else {
-      return alert(`${recipe.recipe_name} already exist`);
+      return alert(`${recipe.recipe_name} added to cook`);
     }
   };
 
@@ -45,7 +60,7 @@ const Recipes = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto my-6 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-2 ">
+    <div id="main" className="w-11/12 mx-auto my-6 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-2 ">
       <div className="lg:col-span-2 grid lg:grid-cols-2 gap-6">
         {recipes.map((recipe, idx) => (
           <Recipe

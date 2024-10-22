@@ -22,4 +22,4 @@ const removedData = (id)=>{
 const removedAllData=()=>{
     localStorage.removeItem('chefsData')
 }
-export {addData,removedData}
+export {addData,removedData,getData}
