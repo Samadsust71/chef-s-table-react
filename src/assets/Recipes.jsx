@@ -26,7 +26,7 @@ const Recipes = () => {
           }
         }
         setWantCook(savedCart);
-        console.log(savedCart)
+        
       }
   },[recipes])
 
